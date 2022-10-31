@@ -1,0 +1,21 @@
+name: Test, Build container
+on:
+  push:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        working-directory: ./bitnami/clickhouse/22.9/debian-11/
+     
+      - name: Build and push Docker images
+        uses: docker/build-push-action@v1
+        with:
+          username: _json_key
+          password: ${{ secrets.GITHUB_TOKEN }}
+          registry: docker.pkg.github.com
+          repository: playson-dev/clickhouse-bitnami/clickhouse
+          tag_with_ref: true
+        working-directory: ./bitnami/clickhouse/22.9/debian-11/
+
