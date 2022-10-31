@@ -15,6 +15,7 @@ set -o pipefail
 
 # Load ClickHouse environment variables
 . /opt/bitnami/scripts/clickhouse-env.sh
+TOKEN=`curl -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 21600"` && ZONE=`curl -H "X-aws-ec2-metadata-token: $TOKEN" http://169.254.169.254/latest/meta-data/placement/availability-zone` && if [[ "$ZONE"  = "eu-central-1a" ]] ; then export KAFKA_BROKER_LIST=kafka-cp-kafka-2.kafka-cp-kafka-headless.confluent; elif [[ "$ZONE"  = "eu-central-1b" ]]; then export KAFKA_BROKER_LIST=kafka-cp-kafka-1.kafka-cp-kafka-headless.confluent; else export KAFKA_BROKER_LIST=kafka-cp-kafka-0.kafka-cp-kafka-headless.confluent;fi
 
 declare -a cmd=("${CLICKHOUSE_BASE_DIR}/bin/clickhouse-server")
 declare -a args=("--config-file=${CLICKHOUSE_CONF_FILE}" "--pid-file=${CLICKHOUSE_PID_FILE}")
