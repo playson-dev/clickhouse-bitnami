@@ -19,6 +19,6 @@ jobs:
           registry: docker.pkg.github.com
           repository: playson-dev/clickhouse-bitnami/clickhouse
           tag_with_ref: true
-          path: ./bitnami/clickhouse/22.9/debian-11/Dockerfile
+          path: ./bitnami/clickhouse/22.9/debian-11/
 #        working-directory: ./bitnami/clickhouse/22.9/debian-11/
 
