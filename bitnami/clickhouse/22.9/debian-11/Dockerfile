@@ -36,10 +36,11 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
 RUN apt-get update && apt-get upgrade -y && \
     apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
-RUN chmod 777 /opt/bitnami/scripts/clickhouse-env.sh
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/clickhouse/postunpack.sh
+RUN chmod 777 /opt/bitnami/scripts/clickhouse-env.sh
+
 ENV APP_VERSION="22.9.4" \
     BITNAMI_APP_NAME="clickhouse" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/clickhouse/bin:$PATH" \
