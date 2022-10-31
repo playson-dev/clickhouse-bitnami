@@ -78,3 +78,4 @@ export CLICKHOUSE_DAEMON_GROUP="bitnami"
 export PATH="${CLICKHOUSE_BASE_DIR}/bin:${BITNAMI_ROOT_DIR}/common/bin:$PATH"
 
 # Custom environment variables may be defined below
+TOKEN=`curl -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 21600"` && ZONE=`curl -H "X-aws-ec2-metadata-token: $TOKEN" http://169.254.169.254/latest/meta-data/placement/availability-zone` && if [[ "$ZONE"  = "eu-central-1a" ]] ; then export KAFKA_BROKER_LIST=kafka-cp-kafka-2.kafka-cp-kafka-headless.confluent; elif [[ "$ZONE"  = "eu-central-1b" ]]; then export KAFKA_BROKER_LIST=kafka-cp-kafka-1.kafka-cp-kafka-headless.confluent; else export KAFKA_BROKER_LIST=kafka-cp-kafka-0.kafka-cp-kafka-headless.confluent";fi
