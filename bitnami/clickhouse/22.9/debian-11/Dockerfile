@@ -48,6 +48,6 @@ ENV APP_VERSION="22.9.4" \
 
 EXPOSE 8123 9000 9004 9005 9009
 
-#USER 1001
+USER 1001
 ENTRYPOINT [ "/opt/bitnami/scripts/clickhouse/entrypoint.sh" ]
 CMD [ "/opt/bitnami/scripts/clickhouse/run.sh", "--", "--listen_host=0.0.0.0" ]
